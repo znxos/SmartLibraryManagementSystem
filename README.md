@@ -17,6 +17,42 @@ The Smart Library Management System is a web application I'm developing to assis
 
 ---
 
+## Language Choice and Key Design Decisions
+
+The system is implemented in Java using Spring Boot for the backend. Java was chosen because it is the language I am most comfortable with and Spring Boot makes it straightforward to build REST APIs with built-in security and JPA support.
+
+**Key design decisions in the code:**
+
+- `UserAccount` is an abstract base class that both `Member` and `Librarian` extend, keeping authentication logic in one place
+- `Fine` is composed within `Loan` because a fine cannot exist without the loan that generated it
+- The `DatabaseConnection` Singleton ensures only one database connection exists at any time
+- The `BookBuilder` provides a clean, validated way to construct Book objects with many optional fields
+
+---
+
+## Creational Pattern Rationales
+
+| Pattern          | Class                 | Rationale                                                                                             |
+| ---------------- | --------------------- | ----------------------------------------------------------------------------------------------------- |
+| Simple Factory   | `UserFactory`         | Centralises user creation so all Member and Librarian objects are created in one place                |
+| Factory Method   | `NotificationCreator` | Different notification types are created by specific subclasses without changing the base interface   |
+| Abstract Factory | `AccountFactory`      | Ensures Member and Librarian accounts are always created with compatible welcome notifications        |
+| Builder          | `BookBuilder`         | Books have many optional fields; the Builder allows step-by-step construction with validation         |
+| Prototype        | `BookPrototypeCache`  | Common book templates can be cloned and customised instead of being configured from scratch each time |
+| Singleton        | `DatabaseConnection`  | Only one database connection should exist throughout the application to prevent conflicts             |
+
+---
+
+## Project Structure
+
+```
+/src/main/java/domain               — Core class implementations
+/src/main/java/creational_patterns  — All six creational design patterns
+/src/test/java/tests                — Unit tests for all patterns
+```
+
+---
+
 ## Project Documentation
 
 | Document                                                   | Description                                                                                                                     |
@@ -37,20 +73,19 @@ The Smart Library Management System is a web application I'm developing to assis
 | [ACTIVITY-DIAGRAMS.md](./ACTIVITY-DIAGRAMS.md)             | Activity diagrams for 8 key system workflows                                                                                    |
 | [DOMAIN-MODEL.md](./DOMAIN-MODEL.md)                       | Domain model describing key entities, attributes, methods, and business rules                                                   |
 | [CLASS-DIAGRAM.md](./CLASS-DIAGRAM.md)                     | Full UML class diagram with relationships, multiplicity, and design decisions                                                   |
-| [REFLECTION.md](./REFLECTION.md)                           | Reflection on challenges in domain modeling and class diagram development                                                       |
+| [CHANGELOG.md](./CHANGELOG.md)                             | Change log tracking all updates                                                                                                 |
+| [REFLECTION.md](./REFLECTION.md)                           | Latest assignment reflection                                                                                                    |
 
 ---
 
 ## Kanban Board Customisation
 
-The project board for this system is based on the Automated Kanban template and has been customised with two additional columns to better reflect the actual development workflow:
+The project board uses the Automated Kanban template with two additional columns:
 
-| Column  | Purpose                                                                                                    |
-| ------- | ---------------------------------------------------------------------------------------------------------- |
-| Testing | For features that have been built and are being validated against the acceptance criteria in TEST-CASES.md |
-| Blocked | For work that cannot move forward until a dependency or issue is resolved                                  |
-
-The full explanation of the board including WIP limits and Agile alignment can be found in [KANBAN-EXPLANATION.md](./KANBAN-EXPLANATION.md).
+| Column  | Purpose                                                 |
+| ------- | ------------------------------------------------------- |
+| Testing | Features being validated against acceptance criteria    |
+| Blocked | Work that cannot proceed until a dependency is resolved |
 
 ---
 
@@ -71,4 +106,4 @@ The full explanation of the board including WIP limits and Agile alignment can b
 Student: Thato Anikie Mabilo
 Student number: 222148349
 Lecturer: Dr. Boniface Kabaso
-Assignment 9: Smart Library Management System
+Assignment 10: Smart Library Management System
