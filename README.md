@@ -53,6 +53,43 @@ The system is implemented in Java using Spring Boot for the backend. Java was ch
 
 ---
 
+## Getting Started
+
+1. Fork this repository
+2. Clone your fork:
+```bash
+git clone https://github.com/YOUR_USERNAME/SmartLibraryManagementSystem.git
+```
+3. Open in IntelliJ IDEA and let Maven load dependencies
+4. Run tests to confirm everything works:
+```bash
+mvn test
+```
+5. Start the application:
+```bash
+mvn spring-boot:run
+```
+6. Visit `http://localhost:8080/swagger-ui/index.html` to explore the API
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for full setup instructions.
+
+---
+
+## Features for Contribution
+
+| Feature | Description | Difficulty |
+|---------|-------------|------------|
+| Add unit tests for domain classes | Write JUnit tests for Book, Loan, Fine and Reservation domain classes | Easy |
+| Export JaCoCo report | Commit the generated coverage report to the repo so it is visible without running the project | Easy |
+| Add input validation | Add null checks and validation to the Reservation and Fine domain classes | Easy |
+| Add more book endpoints | Add endpoints to search books by year published and title | Easy |
+| Reservation API | Expose REST endpoints for the Reservation entity following the same pattern as BookController | Medium |
+| Fine API | Expose REST endpoints for the Fine entity following the same pattern as BookController | Medium |
+| Email notifications | Send due date reminders using Spring Mail | Hard |
+| Database integration | Replace in-memory repositories with MySQL using Spring Data JPA | Hard |
+
+---
+
 ## Repository Layer
 
 The system uses a repository pattern to abstract all data storage behind interfaces.
@@ -184,4 +221,4 @@ The project board uses the Automated Kanban template with two additional columns
 Student: Thato Anikie Mabilo
 Student number: 222148349
 Lecturer: Dr. Boniface Kabaso
-Assignment 13: Smart Library Management System
+Assignment 14: Smart Library Management System
